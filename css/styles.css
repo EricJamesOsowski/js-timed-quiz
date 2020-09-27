@@ -20,3 +20,26 @@
 .card-body {
     background-color: rgba(0,0,0,.03);
 }
+
+.card-header {
+  border-bottom: none;
+  border-bottom-width: none;
+  border-bottom-style: none;
+  border-bottom-color: none;
+}
+
+.answer-options {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 20%;
+}
+
+.question-box {
+  text-align: center;
+}
+
+#question-box-container {
+margin-top: 30px;
+max-width: 65%;
+margin-bottom: 50px;
+}
