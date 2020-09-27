@@ -1,0 +1,22 @@
+  .right {
+    float: right;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .display-box {
+    text-align: center;
+    padding: .5rem;
+    border: 2px;
+    border-style: solid;
+    font-weight: 700;
+    border-radius: 4px;
+    border-collapse: separate;
+    border-spacing: .25rem;
+}
+
+.card-body {
+    background-color: rgba(0,0,0,.03);
+}
