@@ -44,7 +44,7 @@ max-width: 65%;
 margin-bottom: 50px;
 }
 
-.start-button {
+.start-button, .continue-button {
   margin:auto;
   display: inline-block;
   border-radius: 4px;
@@ -60,14 +60,14 @@ margin-bottom: 50px;
   margin: 5px;
 }
 
-.start-button span {
+.start-button span, .continue-button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.start-button span:after {
+.start-button span:after, .continue-button span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -76,11 +76,11 @@ margin-bottom: 50px;
   transition: 0.5s;
 }
 
-.start-button:hover span {
+.start-button:hover span, .continue-button:hover span {
   padding-right: 25px;
 }
 
-.start-button:hover span:after {
+.start-button:hover span:after, .continue-button:hover span:after {
   opacity: 1;
   right: 0;
 }

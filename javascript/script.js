@@ -1,36 +1,16 @@
-var startButton = document.getElementById("start-button");
-
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
-            timer = 0;
-        }
-    }, 1000);
-}
-
-startButton.onclick = function () {
-    startButton.style.display = "none";
-
-    var timerlength = 60,
-        display = document.querySelector('#time');
-    startTimer(timerlength, display);
-    
-}
-
+var startButton = document.querySelector(".start-button");
+var questionText = document.getElementById("question-box");
+var answer1 = document.getElementById("answer1");
+var answer2 = document.getElementById("answer2");
+var answer3 = document.getElementById("answer3");
+var answer4 = document.getElementById("answer4");
+var quizHasStarted = false;
 
 var quiz = [
     {
         "question"      :   "How do you link a JavaScript file to an HTML page? ",
         "choices"       :   [
-                                "<link src = \"javascript.js\">",
+                                {displayText: "<link src = \"javascript.js\">", isCorrect : false},
                                 "<include javascript.js",
                                 "<script src =\"javascript.js\">",
                                 "<javascript = src\"javascript.js\""
@@ -90,3 +70,50 @@ var quiz = [
 
 
 ];
+
+// ===== TIMER =============================//
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = 0;
+        }
+    }, 1000);
+}
+
+if (!quizHasStarted) {
+    
+    startButton.onclick = function () {
+    
+    startButton.setAttribute("class", "continue-button"); 
+    startButton.setAttribute("id", "continue-button");
+    startButton.innerHTML = ("Continue");
+    // startButton.style.display = "none";
+
+
+    var timerlength = 60,
+    display = document.querySelector('#time');
+    if (!quizHasStarted) {
+        startTimer(timerlength, display);
+    }
+    
+    quizHasStarted = true;
+    
+    for (let i = 0; i < quiz.length; i++) {
+        questionText.innerHTML = quiz[i].question;
+        answer1.value = quiz[i].choices[0].displayText;
+        answer2.value = quiz[i].choices[1];
+        answer3.value = quiz[i].choices[2];
+        answer4.value = quiz[i].choices[3];
+
+    }
+
+}
+}
