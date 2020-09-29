@@ -57,7 +57,6 @@ margin-bottom: 50px;
   width: 200px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
 }
 
 .start-button span, .continue-button span {
@@ -83,4 +82,24 @@ margin-bottom: 50px;
 .start-button:hover span:after, .continue-button:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+.continue-button:disabled {
+  background-color: #dd9c89;
+
+}
+
+.continue-button:disabled span {
+  content: none;
+  right: 0;
+  padding-right: 0;
+}
+
+.continue-button:disabled span:after {
+  content: none;
+  right: 0;
+}
+
+.answer-options:hover {
+background-color: lightgrey;
 }

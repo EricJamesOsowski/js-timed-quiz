@@ -1,74 +1,64 @@
 var startButton = document.querySelector(".start-button");
-var questionText = document.getElementById("question-box");
-var answer1 = document.getElementById("answer1");
-var answer2 = document.getElementById("answer2");
-var answer3 = document.getElementById("answer3");
-var answer4 = document.getElementById("answer4");
+var continueButton = document.querySelector(".continue-button");
+var mainButtonText = document.getElementById("buttonText");
 var quizHasStarted = false;
+var curQuestion = 0;
 
 var quiz = [
     {
         "question"      :   "How do you link a JavaScript file to an HTML page? ",
         "choices"       :   [
                                 {displayText: "<link src = \"javascript.js\">", isCorrect : false},
-                                "<include javascript.js",
-                                "<script src =\"javascript.js\">",
-                                "<javascript = src\"javascript.js\""
-                            ],
-        "correct"       :   "<script src =\"javascript.js\">",
+                                {displayText: "<include javascript.js", isCorrect : false},
+                                {displayText: "<script src =\"javascript.js\">", isCorrect : true},
+                                {displayText: "<javascript = src\"javascript.js\"", isCorrect : false},
+                            ]
     },
     {
         "question"      :   "A very useful tool used during development and debugging for printing content to the debugger is:",
         "choices"       :   [
-                                "Javascript",
-                                "Terminal / Bash",
-                                "For loops",
-                                "console.log"
-                            ],
-        "correct"       :   "console.log",
+                                {displayText: "Javascript", isCorrect : false},
+                                {displayText: "Terminal / Bash", isCorrect : false},
+                                {displayText: "For loops", isCorrect : false},
+                                {displayText: "console.log", isCorrect : true},
+                            ]
     },
     {
-        "question"      :   "String values must be encolsed within ______ when being assigned to variables.",
+        "question"      :   "String values must be enclosed within ______ when being assigned to variables.",
         "choices"       :   [
-                                "Commas",
-                                "Curly brackets",
-                                "Double quotes",
-                                "Parentheses"
-                            ],
-        "correct"       :   "Double quotes",
+                                {displayText: "Commas", isCorrect : false},
+                                {displayText: "Curly brackets", isCorrect : false},
+                                {displayText: "Double quotes", isCorrect : true},
+                                {displayText: "Parentheses", isCorrect : false},
+                            ]
     },
     {
         "question"      :   "Arrays in JavaScript can be used to store _______.",
         "choices"       :   [
-                                "Numbers and strings",
-                                "Other Arrays",
-                                "Booleans",
-                                "All of the above"
-                            ],
-        "correct"       :   "All of the above",
+                                {displayText: "Numbers and strings", isCorrect : false},
+                                {displayText: "Other Arrays", isCorrect : false},
+                                {displayText: "Booleans", isCorrect : false},
+                                {displayText: "All of the above",  isCorrect : true},
+                            ]
     },
     {
-        "question"      :   "The condition in an if / else statemtn is encosed within ______.",
+        "question"      :   "The condition in an if / else statement is encosed within ______.",
         "choices"       :   [
-                                "Double quotes",
-                                "Curly brackets",
-                                "Parentheses",
-                                "Square brackets"
-                            ],
-        "correct"       :   "Curly brackets",
+                                {displayText: "Double quotes",  isCorrect : false},
+                                {displayText: "Curly brackets",  isCorrect : true},
+                                {displayText: "Parentheses",  isCorrect : false},
+                                {displayText: "Square brackets",  isCorrect : false},
+                            ]
     },
     {
         "question"      :   "Commonly used data types DO NOT include:",
         "choices"       :   [
-                                "Strings",
-                                "Booleans",
-                                "Alerts",
-                                "Numbers"
-                            ],
-        "correct"       :   "Alerts",
-    },
-
-
+                                {displayText: "Strings", isCorrect : false},
+                                {displayText: "Booleans", isCorrect : false},
+                                {displayText: "Alerts", isCorrect : false},
+                                {displayText: "Numbers", isCorrect : false},
+                            ]
+    }
 ];
 
 // ===== TIMER =============================//
@@ -88,32 +78,60 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
-if (!quizHasStarted) {
-    
-    startButton.onclick = function () {
-    
+startButton.onclick = function () {
+    console.log(curQuestion);
+    drawQuestions(curQuestion);
+    incrementCurrentQuestion();
+    mainButtonText.textContent=("Continue")
     startButton.setAttribute("class", "continue-button"); 
     startButton.setAttribute("id", "continue-button");
-    startButton.innerHTML = ("Continue");
-    // startButton.style.display = "none";
-
-
-    var timerlength = 60,
+    continueButton = document.querySelector(".continue-button");
     display = document.querySelector('#time');
-    if (!quizHasStarted) {
+    var timerlength = 60;
+
+    if (!quizHasStarted) 
+    {
         startTimer(timerlength, display);
     }
-    
     quizHasStarted = true;
+    $(':radio').prop('checked',false)
+}
+
+function drawQuestions(index) 
+{
+    var questionText = document.getElementById("question-box");
+    var answer1 = document.getElementById("answer1");
+    var answer2 = document.getElementById("answer2");
+    var answer3 = document.getElementById("answer3");
+    var answer4 = document.getElementById("answer4");
+    answer1.setAttribute("index", "0");
+    answer2.setAttribute("index", "1"); 
+    answer3.setAttribute("index", "2"); 
+    answer4.setAttribute("index", "3"); 
+    var answerText1 = document.getElementById("answer-text1");
+    var answerText2 = document.getElementById("answer-text2");
+    var answerText3 = document.getElementById("answer-text3");
+    var answerText4 = document.getElementById("answer-text4");
+    answerText1.textContent = " " + quiz[index].choices[0].displayText;
+    answerText2.textContent = " " + quiz[index].choices[1].displayText;
+    answerText3.textContent = " " + quiz[index].choices[2].displayText;
+    answerText4.textContent = " " + quiz[index].choices[3].displayText;
+    questionText.innerHTML = quiz[index].question;
+    startButton.setAttribute("disabled", true);
     
-    for (let i = 0; i < quiz.length; i++) {
-        questionText.innerHTML = quiz[i].question;
-        answer1.value = quiz[i].choices[0].displayText;
-        answer2.value = quiz[i].choices[1];
-        answer3.value = quiz[i].choices[2];
-        answer4.value = quiz[i].choices[3];
-
-    }
-
+    var clickableBoxes = document.querySelectorAll(".answer-options");
+    for (let i = 0; i < clickableBoxes.length; i++) {
+       clickableBoxes[i].onclick = function(userChoice) {
+        selectChoice(userChoice);
+       }
+    } 
 }
+
+function selectChoice(userChoice) {
+    startButton.removeAttribute("disabled");
 }
+
+function incrementCurrentQuestion() {
+    curQuestion++;
+}
+
