@@ -5,13 +5,15 @@ var quizHasStarted = false;
 var clickableBoxes = document.querySelectorAll(".answer-options");
 var curQuestion = 0;
 var timeLeft = 60;
+// var quizIsOver = false;
 
 
 
 function myTimer() {
     timeLeft --;
-    if (timeLeft == 0) {
-        stopTimer();
+    if (timeLeft <= 0) {
+        
+        stopTest();
     }
     display.textContent = timeLeft;
 }
@@ -21,35 +23,19 @@ function stopTimer() {
 }
 
 function stopTest() {
-    console.log("StopTest has been called");    
+    console.log("StopTest has been called");
+    stopTimer();
+    var userScore = timeLeft;
+    alert(" Your final score was: "+userScore);
+    goToScoreboard();
+    display.textContent = userScore;
+    // quizIsOver = true;
+
 }
-
-
-// ===== TIMER counts down every second. Pass in duration and an element to display in =============================//
-// setInterval(() => {
-    
-// }, 1000);
-
-// setTimeout(stopTest, 60000);
-
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    
-}
-
-
-
-
-
-
-
-
-
 
 for (let i = 0; i < clickableBoxes.length; i++) {
     clickableBoxes[i].setAttribute("hidden", true);
 }
-
 
 var quiz = [
     //Long ago, the four nations lived together in harmony. Then everything changed when the fire nation attacked.
@@ -124,8 +110,7 @@ startButton.onclick = function () {
         console.log("current question+1 is :"+(curQuestion+1))
     }
     else if ((curQuestion+1) == quiz.length) {
-        toast("The quiz iz over!")
-        setTimeout(function(){ goToScoreboard(); }, 2000);
+        stopTest();
     }
 
     // Changes start buttont to say continue
@@ -139,8 +124,7 @@ startButton.onclick = function () {
     // Stops multiple timers from going at once.
     if (!quizHasStarted) 
     {
-        var myVar = setInterval(myTimer, 1000);
-        // startTimer(timerlength, display);
+        window.myVar = setInterval(myTimer, 1000);
     }
     quizHasStarted = true;
 
@@ -206,11 +190,8 @@ function submitChoice(userChoice) {
     }
     else if ( !quiz[curQuestion-1].choices[choiceIndex].isCorrect ) {
         toast("Incorrect")
-        decrementTimer();
-    }  
-    else {
-        toast("I don't know how, but you've broken my program. It doesn't matter much, we live in a dream within a dream and what we know of as reality is just an illusion created by our attatchment to ephemeral corporeal bodies.")
-    }
+        timeLeft = decrementTimer(timeLeft);
+    } 
     //  you have the index number, just compare it above and use quiz[something].sometihng[index] or some shit
     // console.dir("The Jquerey thing has submitted :"+ JSON.stringify($('input[name=choice]:checked')));
     // console.log("NON STRINGY"+ $('input[name=choice]:checked'));
@@ -222,12 +203,15 @@ function toast(snackText) {
     x.className = "show";
     x.innerHTML = snackText;
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
-  }
+}
 
-function decrementTimer() {
-    timer - 10;
+function decrementTimer(timer) {
+    console.log(timer);
+    timer -= 10;
+    console.log(timer);
+    return timer;
 }
 
 function goToScoreboard() {
     location.replace("scoreboard.html")
-  }
+}
