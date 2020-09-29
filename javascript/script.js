@@ -4,10 +4,52 @@ var mainButtonText = document.getElementById("buttonText");
 var quizHasStarted = false;
 var clickableBoxes = document.querySelectorAll(".answer-options");
 var curQuestion = 0;
+var timeLeft = 60;
+
+
+
+function myTimer() {
+    timeLeft --;
+    if (timeLeft == 0) {
+        stopTimer();
+    }
+    display.textContent = timeLeft;
+}
+
+function stopTimer() {
+    clearInterval(myVar);
+}
+
+function stopTest() {
+    console.log("StopTest has been called");    
+}
+
+
+// ===== TIMER counts down every second. Pass in duration and an element to display in =============================//
+// setInterval(() => {
+    
+// }, 1000);
+
+// setTimeout(stopTest, 60000);
+
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    
+}
+
+
+
+
+
+
+
+
+
 
 for (let i = 0; i < clickableBoxes.length; i++) {
     clickableBoxes[i].setAttribute("hidden", true);
 }
+
 
 var quiz = [
     //Long ago, the four nations lived together in harmony. Then everything changed when the fire nation attacked.
@@ -67,30 +109,26 @@ var quiz = [
     }
 ];
 
-// ===== TIMER counts down every second. Pass in duration and an element to display in =============================//
-function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
 
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        display.textContent = minutes + ":" + seconds;
-// This stops the timer at 0
-        if (--timer < 0) {
-            timer = 0;
-        }
-    }, 1000);
-}
 
 startButton.onclick = function () {
+    
     for (let i = 0; i < clickableBoxes.length; i++) {
         clickableBoxes[i].removeAttribute("hidden", false);
     }
-    // console.log(curQuestion);
-    drawQuestions(curQuestion);
-    
+
+    if ((curQuestion+1) < quiz.length) {
+        // Populates page with current question and answers
+        drawQuestions(curQuestion);
+        console.log("Quiz length is "+quiz.length);
+        console.log("current question+1 is :"+(curQuestion+1))
+    }
+    else if ((curQuestion+1) == quiz.length) {
+        toast("The quiz iz over!")
+        setTimeout(function(){ goToScoreboard(); }, 2000);
+    }
+
+    // Changes start buttont to say continue
     mainButtonText.textContent=("Continue")
     startButton.setAttribute("class", "continue-button"); 
     startButton.setAttribute("id", "continue-button");
@@ -101,23 +139,25 @@ startButton.onclick = function () {
     // Stops multiple timers from going at once.
     if (!quizHasStarted) 
     {
-        startTimer(timerlength, display);
+        var myVar = setInterval(myTimer, 1000);
+        // startTimer(timerlength, display);
     }
     quizHasStarted = true;
+
     var checked = document.querySelector("input[type=radio]:checked");
-    
     if (checked != null) {
         submitChoice(checked);
     }
 
-
+    // Sets an index value to the radio buttons to be linked with quiz[curQuestion-1]choices[index of radio chose].isCorrect
     for (let i = 0; i < clickableBoxes.length; i++) {
        clickableBoxes[i].onclick = function(userChoice) {
         selectChoice(userChoice);
        }
     } 
     
-    incrementCurrentQuestion();    
+    // Adds 1 to curQuestion
+    incrementCurrentQuestion();
     // Resets all radios to false
     $(':radio').prop('checked',false)
 }
@@ -151,21 +191,22 @@ function selectChoice(userChoice) {
 }
 
 function incrementCurrentQuestion() {
-    curQuestion++;
+    curQuestion ++;
 }
 
 function submitChoice(userChoice) {
     var choiceIndex = userChoice.getAttribute("index");
 
-    console.log(choiceIndex);
-    console.log(curQuestion-1);
-    console.log(quiz[curQuestion-1].choices[choiceIndex]);
+    // console.log(choiceIndex);
+    // console.log(curQuestion-1);
+    // console.log(quiz[curQuestion-1].choices[choiceIndex]);
 
     if ( quiz[curQuestion-1].choices[choiceIndex].isCorrect ) {
         toast("Correct!!!");
     }
     else if ( !quiz[curQuestion-1].choices[choiceIndex].isCorrect ) {
         toast("Incorrect")
+        decrementTimer();
     }  
     else {
         toast("I don't know how, but you've broken my program. It doesn't matter much, we live in a dream within a dream and what we know of as reality is just an illusion created by our attatchment to ephemeral corporeal bodies.")
@@ -180,5 +221,13 @@ function toast(snackText) {
     var x = document.getElementById("snackbar");
     x.className = "show";
     x.innerHTML = snackText;
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
+  }
+
+function decrementTimer() {
+    timer - 10;
+}
+
+function goToScoreboard() {
+    location.replace("scoreboard.html")
   }

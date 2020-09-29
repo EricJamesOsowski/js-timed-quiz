@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="css/styles.css">
     <title>Document</title>
 </head>
 <body>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="display-box left" id="scorebox">
+                High Score:
+            </div>
+            <div class="right display-box" id="timer">Your Score Was: <span id="time">PUT USERSCORE here</span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="container" id="question-box-container"><h2 class="question-box" id="question-box">Scoreboard!</h2></div>
+            <div class="row" id="question-box-container">
+                <h5>Enter your initials here to save your score</h5>
+                <input type="text" class="left-padded"/>
+            </div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"><br><div id="snackbar"></div><br></div>
+            <div class="row">
+                <button class="continue-button" id="save-button" style="vertical-align:middle"><span id="buttonText">Save Score</span></button>
+                <button class="continue-button" id="retake-button" style="vertical-align:middle"><span id="buttonText">Retake Test</span></button>
+                <button class="continue-button" id="clear-scores-button" style="vertical-align:middle"><span id="buttonText">Clear Scores</span></button>
+            </div>
+        </div>
+      </div>
 
-
-
-    
+</div>
 <script src="javascript/script.js"></script>
 </body>
 </html>

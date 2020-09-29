@@ -6,6 +6,11 @@
     float: left;
   }
 
+  .left-padded {
+
+    margin-left: 25%;
+  }
+
   .display-box {
     text-align: center;
     padding: .5rem;
@@ -144,4 +149,10 @@ background-color: lightgrey;
 @keyframes fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+
+.center-text {
+  text-align: center;
+  float: right;
+  color: green;
 }
