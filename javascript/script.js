@@ -2,9 +2,15 @@ var startButton = document.querySelector(".start-button");
 var continueButton = document.querySelector(".continue-button");
 var mainButtonText = document.getElementById("buttonText");
 var quizHasStarted = false;
+var clickableBoxes = document.querySelectorAll(".answer-options");
 var curQuestion = 0;
 
+for (let i = 0; i < clickableBoxes.length; i++) {
+    clickableBoxes[i].setAttribute("hidden", true);
+}
+
 var quiz = [
+    //Long ago, the four nations lived together in harmony. Then everything changed when the fire nation attacked.
     {
         "question"      :   "How do you link a JavaScript file to an HTML page? ",
         "choices"       :   [
@@ -61,7 +67,7 @@ var quiz = [
     }
 ];
 
-// ===== TIMER =============================//
+// ===== TIMER counts down every second. Pass in duration and an element to display in =============================//
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
@@ -71,7 +77,7 @@ function startTimer(duration, display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
         display.textContent = minutes + ":" + seconds;
-
+// This stops the timer at 0
         if (--timer < 0) {
             timer = 0;
         }
@@ -79,9 +85,12 @@ function startTimer(duration, display) {
 }
 
 startButton.onclick = function () {
-    console.log(curQuestion);
+    for (let i = 0; i < clickableBoxes.length; i++) {
+        clickableBoxes[i].removeAttribute("hidden", false);
+    }
+    // console.log(curQuestion);
     drawQuestions(curQuestion);
-    incrementCurrentQuestion();
+    
     mainButtonText.textContent=("Continue")
     startButton.setAttribute("class", "continue-button"); 
     startButton.setAttribute("id", "continue-button");
@@ -89,11 +98,27 @@ startButton.onclick = function () {
     display = document.querySelector('#time');
     var timerlength = 60;
 
+    // Stops multiple timers from going at once.
     if (!quizHasStarted) 
     {
         startTimer(timerlength, display);
     }
     quizHasStarted = true;
+    var checked = document.querySelector("input[type=radio]:checked");
+    
+    if (checked != null) {
+        submitChoice(checked);
+    }
+
+
+    for (let i = 0; i < clickableBoxes.length; i++) {
+       clickableBoxes[i].onclick = function(userChoice) {
+        selectChoice(userChoice);
+       }
+    } 
+    
+    incrementCurrentQuestion();    
+    // Resets all radios to false
     $(':radio').prop('checked',false)
 }
 
@@ -119,12 +144,6 @@ function drawQuestions(index)
     questionText.innerHTML = quiz[index].question;
     startButton.setAttribute("disabled", true);
     
-    var clickableBoxes = document.querySelectorAll(".answer-options");
-    for (let i = 0; i < clickableBoxes.length; i++) {
-       clickableBoxes[i].onclick = function(userChoice) {
-        selectChoice(userChoice);
-       }
-    } 
 }
 
 function selectChoice(userChoice) {
@@ -135,3 +154,31 @@ function incrementCurrentQuestion() {
     curQuestion++;
 }
 
+function submitChoice(userChoice) {
+    var choiceIndex = userChoice.getAttribute("index");
+
+    console.log(choiceIndex);
+    console.log(curQuestion-1);
+    console.log(quiz[curQuestion-1].choices[choiceIndex]);
+
+    if ( quiz[curQuestion-1].choices[choiceIndex].isCorrect ) {
+        toast("Correct!!!");
+    }
+    else if ( !quiz[curQuestion-1].choices[choiceIndex].isCorrect ) {
+        toast("Incorrect")
+    }  
+    else {
+        toast("I don't know how, but you've broken my program. It doesn't matter much, we live in a dream within a dream and what we know of as reality is just an illusion created by our attatchment to ephemeral corporeal bodies.")
+    }
+    //  you have the index number, just compare it above and use quiz[something].sometihng[index] or some shit
+    // console.dir("The Jquerey thing has submitted :"+ JSON.stringify($('input[name=choice]:checked')));
+    // console.log("NON STRINGY"+ $('input[name=choice]:checked'));
+}
+
+
+function toast(snackText) {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    x.innerHTML = snackText;
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+  }
