@@ -47,8 +47,6 @@ clearScoresButton.onclick = function () {
     document.getElementById("scoreboard-table").innerHTML = "";
 }
 
-
-
 function saveInitials() {
     var userInitials = document.getElementById("initials-box").value;
     if (userInitials && userScore) {
