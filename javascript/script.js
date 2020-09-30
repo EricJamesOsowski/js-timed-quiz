@@ -5,14 +5,13 @@ var quizHasStarted = false;
 var clickableBoxes = document.querySelectorAll(".answer-options");
 var curQuestion = 0;
 var timeLeft = 60;
-// var quizIsOver = false;
-
+var scoreboardButton = document.getElementById("scorebox");
 
 
 function myTimer() {
     timeLeft --;
     if (timeLeft <= 0) {
-        
+        timeLeft = 0;
         stopTest();
     }
     display.textContent = timeLeft;
@@ -23,14 +22,13 @@ function stopTimer() {
 }
 
 function stopTest() {
-    console.log("StopTest has been called");
-    stopTimer();
+        stopTimer();
     var userScore = timeLeft;
-    alert(" Your final score was: "+userScore);
-    goToScoreboard();
-    display.textContent = userScore;
-    // quizIsOver = true;
-
+    setTimeout(() => {
+       alert(" Your final score was: "+userScore);
+       localStorage.setItem('userScore', JSON.stringify(userScore));
+       goToScoreboard();
+    }, 1500);
 }
 
 for (let i = 0; i < clickableBoxes.length; i++) {
@@ -95,7 +93,9 @@ var quiz = [
     }
 ];
 
-
+scoreboardButton.onclick = function () {
+    goToScoreboard();
+}
 
 startButton.onclick = function () {
     
@@ -103,13 +103,11 @@ startButton.onclick = function () {
         clickableBoxes[i].removeAttribute("hidden", false);
     }
 
-    if ((curQuestion+1) < quiz.length) {
+    if ((curQuestion) < quiz.length) {
         // Populates page with current question and answers
         drawQuestions(curQuestion);
-        console.log("Quiz length is "+quiz.length);
-        console.log("current question+1 is :"+(curQuestion+1))
     }
-    else if ((curQuestion+1) == quiz.length) {
+    else if ((curQuestion) == quiz.length) {
         stopTest();
     }
 
@@ -146,6 +144,7 @@ startButton.onclick = function () {
     $(':radio').prop('checked',false)
 }
 
+// Populates the question text area and the radio options with the current question and answer options
 function drawQuestions(index) 
 {
     var questionText = document.getElementById("question-box");
@@ -167,7 +166,6 @@ function drawQuestions(index)
     answerText4.textContent = " " + quiz[index].choices[3].displayText;
     questionText.innerHTML = quiz[index].question;
     startButton.setAttribute("disabled", true);
-    
 }
 
 function selectChoice(userChoice) {
@@ -181,10 +179,6 @@ function incrementCurrentQuestion() {
 function submitChoice(userChoice) {
     var choiceIndex = userChoice.getAttribute("index");
 
-    // console.log(choiceIndex);
-    // console.log(curQuestion-1);
-    // console.log(quiz[curQuestion-1].choices[choiceIndex]);
-
     if ( quiz[curQuestion-1].choices[choiceIndex].isCorrect ) {
         toast("Correct!!!");
     }
@@ -192,9 +186,7 @@ function submitChoice(userChoice) {
         toast("Incorrect")
         timeLeft = decrementTimer(timeLeft);
     } 
-    //  you have the index number, just compare it above and use quiz[something].sometihng[index] or some shit
-    // console.dir("The Jquerey thing has submitted :"+ JSON.stringify($('input[name=choice]:checked')));
-    // console.log("NON STRINGY"+ $('input[name=choice]:checked'));
+
 }
 
 
@@ -206,9 +198,7 @@ function toast(snackText) {
 }
 
 function decrementTimer(timer) {
-    console.log(timer);
     timer -= 10;
-    console.log(timer);
     return timer;
 }
 

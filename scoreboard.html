@@ -15,21 +15,29 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <div class="display-box left" id="scorebox">
-                High Score:
-            </div>
-            <div class="right display-box" id="timer">Your Score Was: <span id="time">PUT USERSCORE here</span>
+            <div class="right display-box" id="timer">Your Score Was: <span id="time" ></span>
             </div>
         </div>
         <div class="card-body">
             <div class="container" id="question-box-container"><h2 class="question-box" id="question-box">Scoreboard!</h2></div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Initials</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody id="scoreboard-table">
+                </tbody>
+              </table>
             <div class="row" id="question-box-container">
                 <h5>Enter your initials here to save your score</h5>
-                <input type="text" class="left-padded"/>
+                <input type="text" class="left-padded" placeholder="Enter initials!" id="initials-box"/>
             </div>
-            <div class="row"></div>
-            <div class="row"></div>
-            <div class="row"></div>
+            <div class="row" id="score1"></div>
+            <div class="row" id="score2"></div>
+            <div class="row" id="score3"></div>
             <div class="row"><br><div id="snackbar"></div><br></div>
             <div class="row">
                 <button class="continue-button" id="save-button" style="vertical-align:middle"><span id="buttonText">Save Score</span></button>
@@ -40,6 +48,6 @@
       </div>
 
 </div>
-<script src="javascript/script.js"></script>
+<script src="javascript/scoreboardScript.js"></script>
 </body>
 </html>
