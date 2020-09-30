@@ -36,59 +36,76 @@ for (let i = 0; i < clickableBoxes.length; i++) {
 }
 
 var quiz = [
-    //Long ago, the four nations lived together in harmony. Then everything changed when the fire nation attacked.
     {
-        "question"      :   "How do you link a JavaScript file to an HTML page? ",
+        "question"      :   "Long ago, the four nations lived together in harmony. Then, everything changed when the _____ nation attacked",
         "choices"       :   [
-                                {displayText: "<link src = \"javascript.js\">", isCorrect : false},
-                                {displayText: "<include javascript.js", isCorrect : false},
-                                {displayText: "<script src =\"javascript.js\">", isCorrect : true},
-                                {displayText: "<javascript = src\"javascript.js\"", isCorrect : false},
+                                {displayText: "Water", isCorrect : false},
+                                {displayText: "Earth", isCorrect : false},
+                                {displayText: "Fire", isCorrect : true},
+                                {displayText: "Air", isCorrect : false},
                             ]
     },
     {
-        "question"      :   "A very useful tool used during development and debugging for printing content to the debugger is:",
+        "question"      :   "Which of the following are NOT Aangs companions?",
         "choices"       :   [
-                                {displayText: "Javascript", isCorrect : false},
-                                {displayText: "Terminal / Bash", isCorrect : false},
-                                {displayText: "For loops", isCorrect : false},
-                                {displayText: "console.log", isCorrect : true},
+                                {displayText: "Appa the sky-bison", isCorrect : false},
+                                {displayText: "Momo the winged Lemur", isCorrect : false},
+                                {displayText: "Katara the water bender", isCorrect : false},
+                                {displayText: "Nyla the shirshu", isCorrect : true},
                             ]
     },
     {
-        "question"      :   "String values must be enclosed within ______ when being assigned to variables.",
+        "question"      :   "What is Sokkas weapon of choice?",
         "choices"       :   [
-                                {displayText: "Commas", isCorrect : false},
-                                {displayText: "Curly brackets", isCorrect : false},
-                                {displayText: "Double quotes", isCorrect : true},
-                                {displayText: "Parentheses", isCorrect : false},
+                                {displayText: "Fire", isCorrect : false},
+                                {displayText: "Sword", isCorrect : false},
+                                {displayText: "Boomerang", isCorrect : true},
+                                {displayText: "Staff", isCorrect : false},
                             ]
     },
     {
-        "question"      :   "Arrays in JavaScript can be used to store _______.",
+        "question"      :   "How do you get Appa to fly?",
         "choices"       :   [
-                                {displayText: "Numbers and strings", isCorrect : false},
-                                {displayText: "Other Arrays", isCorrect : false},
-                                {displayText: "Booleans", isCorrect : false},
-                                {displayText: "All of the above",  isCorrect : true},
+                                {displayText: "Appa, Fly!", isCorrect : false},
+                                {displayText: "Give him a coin", isCorrect : false},
+                                {displayText: "Crack whip", isCorrect : false},
+                                {displayText: "Yip Yip!",  isCorrect : true},
                             ]
     },
     {
-        "question"      :   "The condition in an if / else statement is encosed within ______.",
+        "question"      :   "Which of the following forms of bending DOES NOT exist?",
         "choices"       :   [
-                                {displayText: "Double quotes",  isCorrect : false},
-                                {displayText: "Curly brackets",  isCorrect : true},
-                                {displayText: "Parentheses",  isCorrect : false},
-                                {displayText: "Square brackets",  isCorrect : false},
+                                {displayText: "Metal bending",  isCorrect : false},
+                                {displayText: "Syrup bending",  isCorrect : true},
+                                {displayText: "Blood bending",  isCorrect : false},
+                                {displayText: "Cloud bending",  isCorrect : false},
                             ]
     },
     {
-        "question"      :   "Commonly used data types DO NOT include:",
+        "question"      :   "Which of the following bending techniques did Aang invent himself?",
         "choices"       :   [
-                                {displayText: "Strings", isCorrect : false},
-                                {displayText: "Booleans", isCorrect : false},
-                                {displayText: "Alerts", isCorrect : false},
-                                {displayText: "Numbers", isCorrect : false},
+                                {displayText: "The Water Whip", isCorrect : false},
+                                {displayText: "The Air Scooter", isCorrect : true},
+                                {displayText: "Lightning Bending", isCorrect : false},
+                                {displayText: "Breath Of Fire", isCorrect : false},
+                            ]
+    },
+    {
+        "question"      :   "How did Appa escape the circus?",
+        "choices"       :   [
+                                {displayText: "He chewed his way out of the cage", isCorrect : false},
+                                {displayText: "He whipped the ringleader and escaped", isCorrect : true},
+                                {displayText: "He convinced the tiger trainer to help him", isCorrect : false},
+                                {displayText: "Appa was never in the circus", isCorrect : false},
+                            ]
+    },
+    {
+        "question"      :   "Why was Prince Zuko banished from the Fire Nation?",
+        "choices"       :   [
+                                {displayText: "He spoke out of turn", isCorrect : true},
+                                {displayText: "He shot his brother with an arrow", isCorrect : false},
+                                {displayText: "He was not a skilled enough fire bender", isCorrect : false},
+                                {displayText: "He was beligerant to his father", isCorrect : false},
                             ]
     }
 ];
