@@ -1,10 +1,9 @@
 # js-timed-quiz
 A quiz about basic javascript that is timed and begins when you click the start button. It saves your score and initials in your local storage with the option to clear it.
 
-<<<<<<< HEAD
 # Screenshot
 =======
->>>>>>> a9b8bda3d89bff4a3adca01bc55fa1cd26176e79
+
 ![Screenshot of quiz](./screenshot/screenshot.png)
 
 # Built with:
